@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPscanner - 全方位社群輿情監測系統 (macOS 專用)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-bg: #020617;
+            --accent-cyan: #22d3ee;
+            --accent-blue: #3b82f6;
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, "Microsoft JhengHei", sans-serif;
+            background-color: var(--primary-bg);
+            color: #f1f5f9;
+        }
+
+        /* 確保導覽列始終在最上方 */
+        nav {
+            z-index: 100 !important;
+        }
+
+        .bento-card {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(2, 6, 23, 0.8) 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bento-card:hover {
+            border-color: rgba(34, 211, 238, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+        }
+
+        .exclusive-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to bottom right, #fff 40%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-bg {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+            background-size: 30px 30px;
+        }
+
+        .platform-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 4px 14px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body class="grid-bg min-h-screen">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full py-6 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6">
+            <div id="nav-content" class="bg-transparent border border-transparent rounded-2xl px-6 py-3 flex justify-between items-center transition-all duration-300">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <i data-lucide="radar" class="text-white w-5 h-5"></i>
+                    </div>
+                    <span class="text-xl font-black tracking-tighter text-white italic">OPscanner</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
+                    <a href="#coverage" class="text-slate-400 hover:text-cyan-400">基礎監測</a>
+                    <a href="#exclusive" class="text-cyan-400 hover:text-white">業界獨有功能</a>
+                    <a href="#security" class="text-slate-400 hover:text-cyan-400">隱私架構</a>
+                    <button class="bg-white text-black px-5 py-2 rounded-xl font-black hover:bg-cyan-400 transition-all tracking-normal">
+                        洽詢客服
+                    </button>
+                </div>
+                <button id="menu-btn" class="md:hidden text-white">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mx-6 mt-2 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl">
+            <a href="#coverage" class="text-slate-300 font-bold mobile-link">基礎監測</a>
+            <a href="#exclusive" class="text-cyan-400 font-bold mobile-link">業界獨有功能</a>
+            <a href="#security" class="text-slate-300 font-bold mobile-link">隱私架構</a>
+            <button class="bg-white text-black py-3 rounded-xl font-black">洽詢客服</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-48 pb-24 px-6">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[700px] bg-gradient-to-b from-blue-600/10 via-transparent to-transparent -z-10 text-center"></div>
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-8">
+                The Master of Martech monitoring
+            </div>
+            <h1 class="text-6xl md:text-8xl font-extrabold mb-8 tracking-tighter leading-[0.9]">
+                <span class="text-gradient">全方位平台掃描</span><br>
+                <span class="text-blue-500 text-cyan-400 underline decoration-blue-500/30 underline-offset-8">主宰輿論深水區</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                專為 macOS 開發的頂級輿情系統。在全網掃描的基礎上，我們領先業界突破閉鎖式社群限制，讓您掌握連競品都看不到的關鍵資訊。
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="https://drive.google.com/file/d/1QfXDq5C3N8_zE8qSCv6HWABBLkbiWmHN/view?usp=sharing" target="_blank" class="w-full sm:w-auto bg-white text-black px-10 py-5 rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-cyan-400 transition-all active:scale-95 shadow-2xl">
+                    <i data-lucide="download"></i> 下載軟體 (.dmg)
+                </a>
+                <button class="w-full sm:w-auto bg-slate-900/50 text-white px-10 py-5 rounded-2xl font-bold border border-white/10 hover:bg-slate-800 transition-all">
+                    聯繫客服獲取授權
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bento Grid Section -->
+    <section id="coverage" class="py-10 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-12 md:grid-rows-6 gap-6 h-auto md:h-[1150px]">
+            
+            <!-- 1. Full Platform Coverage (基礎功能 - Wide Banner) -->
+            <div class="md:col-span-12 md:row-span-2 bento-card p-10 flex flex-col md:flex-row justify-between items-center group">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center">
+                            <i data-lucide="search" class="text-white w-5 h-5"></i>
+                        </div>
+                        <span class="text-xs font-black text-slate-500 uppercase tracking-widest">Base Feature</span>
+                    </div>
+                    <h2 class="text-4xl font-extrabold text-white mb-4 tracking-tight">全方位平台監控</h2>
+                    <p class="text-slate-400 max-w-xl text-lg leading-relaxed">
+                        一站式同步爬取 PTT、Dcard、Mobile01、Threads 與全台主流新聞媒體討論，建立最紮實的品牌輿情護城河。
+                    </p>
+                </div>
+                <div class="flex flex-wrap justify-end gap-3 mt-8 md:mt-0">
+                    <span class="platform-tag">PTT</span>
+                    <span class="platform-tag">Dcard</span>
+                    <span class="platform-tag">Mobile01</span>
+                    <span class="platform-tag">News</span>
+                    <span class="platform-tag">Threads</span>
+                </div>
+            </div>
+
+            <!-- 2. FB Private Bonus (殺手級功能 - The Focal Point) -->
+            <div id="exclusive" class="md:col-span-8 md:row-span-4 bento-card p-12 flex flex-col justify-between border-blue-500/40 bg-gradient-to-br from-blue-900/20 to-transparent">
+                <div class="exclusive-glow"></div>
+                <div>
+                    <div class="flex justify-between items-start mb-12">
+                        <div class="w-16 h-16 bg-blue-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-900/50 relative">
+                            <i data-lucide="facebook" class="text-white w-8 h-8"></i>
+                            <div class="absolute -top-3 -right-3 bg-cyan-400 text-black text-[10px] font-black px-2 py-1 rounded-lg animate-pulse">EXCLUSIVE</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-cyan-400 font-black text-xs uppercase tracking-widest mb-1 italic">超越市場的領先技術</div>
+                            <div class="text-slate-500 text-[10px] uppercase tracking-[0.3em]">Deep Scan Module</div>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-tight italic">
+                        甚至，我們能深入 <br><span class="text-cyan-400">私密社團與粉專</span>
+                    </h2>
+                    <p class="text-slate-300 max-w-2xl text-xl leading-relaxed mb-10">
+                        這是 OPscanner 傲視業界的原因。突破閉鎖式社群的限制，支援掃描特定私密社團、爆料群組與特定粉絲專頁。只要您具備權限，模擬路徑技術就能為您挖掘連專業公關公司都難以觸及的深水區討論。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-10">
+                    <div class="flex gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors">
+                        <i data-lucide="unlock" class="text-cyan-400 shrink-0"></i>
+                        <div>
+                            <div class="font-bold text-white mb-1">私密社團掃描</div>
+                            <div class="text-xs text-slate-500">深入在地社團、爆料社群</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors">
+                        <i data-lucide="users" class="text-cyan-400 shrink-0"></i>
+                        <div>
+                            <div class="font-bold text-white mb-1">限定粉專監控</div>
+                            <div class="text-xs text-slate-500">即時掃描特定人物與粉專</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. AI Analysis -->
+            <div class="md:col-span-4 md:row-span-2 bento-card p-8 flex flex-col">
+                <div class="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center border border-emerald-500/30 mb-6">
+                    <i data-lucide="sparkles" class="text-emerald-400 w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">AI 智慧摘要</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    支援 OpenAI API 串接，自動為每一則貼文判斷情緒，並生成 60 字內的核心摘要，秒讀千則評論。
+                </p>
+                <div class="mt-auto flex items-center gap-2 text-[10px] font-mono text-emerald-500/50 italic">
+                    <i data-lucide="check" class="w-3 h-3"></i> BYOK SUPPORTED
+                </div>
+            </div>
+
+            <!-- 4. Local Run & Privacy -->
+            <div id="security" class="md:col-span-4 md:row-span-2 bento-card p-8 flex flex-col bg-slate-900/60">
+                <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 mb-6">
+                    <i data-lucide="lock" class="text-slate-300 w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">隱私本地架構</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    macOS Sandbox 獨立軟體。登入憑證與資料絕不上雲，最高規格保障品牌商業機密。
+                </p>
+                <div class="mt-auto flex justify-between items-center opacity-30 grayscale">
+                    <i data-lucide="apple" class="w-8 h-8 text-white"></i>
+                    <span class="text-[10px] font-black tracking-widest">LOCAL SECURED</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Detailed Tech Section -->
+    <section class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-20 items-center">
+            <div class="space-y-8">
+                <h2 class="text-4xl font-extrabold text-white italic tracking-tight">不僅是工具，<br>更是數據主權的體現</h2>
+                <div class="space-y-6">
+                    <div class="flex gap-5 group">
+                        <div class="shrink-0 w-12 h-12 bg-cyan-500/10 rounded-2xl flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors"><i data-lucide="key" class="text-cyan-400 w-6 h-6"></i></div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1 uppercase tracking-tighter italic">AI BYOK 自由模式</h4>
+                            <p class="text-slate-500 text-sm">串接您自己的 OpenAI API，或聯繫客服獲取專用金鑰（加購），彈性掌控運算成本。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 group">
+                        <div class="shrink-0 w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center group-hover:bg-blue-500/20 transition-colors"><i data-lucide="file-spreadsheet" class="text-blue-400 w-6 h-6"></i></div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1 uppercase tracking-tighter italic">專業級數據導出</h4>
+                            <p class="text-slate-500 text-sm">一鍵匯出 Excel 報表，含自動標註之情緒分析與來源統計，專為決策匯報而生。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-10 rounded-[3rem] bg-gradient-to-b from-white/5 to-transparent border border-white/10 text-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 blur-3xl"></div>
+                <i data-lucide="apple" class="w-20 h-20 text-white mb-10 mx-auto opacity-10"></i>
+                <h3 class="text-3xl font-bold mb-6 italic tracking-tighter">MacOS 專屬系統</h3>
+                <p class="text-slate-500 text-md leading-relaxed mb-10 max-w-xs mx-auto">
+                    支援 Apple Silicon 原生架構，提供比 Web 版工具更強大、更隱密的爬蟲運行效能。
+                </p>
+                <div class="inline-block px-4 py-2 rounded-xl bg-slate-900 border border-white/10 font-mono text-[10px] text-slate-400 uppercase tracking-widest">
+                    Version 2.4 / DMG Installer
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="download" class="py-24 px-6 relative">
+        <div class="max-w-4xl mx-auto bento-card p-12 md:p-24 text-center border-blue-500/30 shadow-3xl">
+            <h2 class="text-5xl md:text-7xl font-black mb-8 italic tracking-tighter italic">The Silent Observer.</h2>
+            <p class="text-slate-400 text-xl mb-12 leading-relaxed">準備好掌握社群數據的主動權了嗎？<br>MacOS 獨立系統已開放下載，請與我們聯繫獲取授權與 AI 功能報價。</p>
+            
+            <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                <a href="https://drive.google.com/file/d/1QfXDq5C3N8_zE8qSCv6HWABBLkbiWmHN/view?usp=sharing" target="_blank" class="bg-white text-black px-12 py-5 rounded-[1.5rem] font-black text-xl hover:scale-105 transition-all shadow-2xl flex items-center justify-center gap-3">
+                    <i data-lucide="download"></i> 下載軟體 (.dmg)
+                </a>
+                <button class="bg-slate-800/80 text-white px-12 py-5 rounded-[1.5rem] font-bold text-xl hover:bg-slate-700 transition-all border border-white/10">
+                    聯繫客服詢價
+                </button>
+            </div>
+            <p class="mt-12 text-[10px] text-slate-600 font-bold uppercase tracking-[0.4em]">Proprietary Monitoring Engine / © 2026</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-slate-600 text-[10px] uppercase tracking-widest">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-3 text-white">
+                <i data-lucide="radar" class="w-6 h-6 text-cyan-400"></i>
+                <span class="font-black italic text-2xl tracking-tighter">OPscanner</span>
+            </div>
+            <div>Powered by MacOS Native Engine. All Data Secured Locally.</div>
+            <div class="flex gap-10">
+                <a href="#" class="hover:text-cyan-400">Security</a>
+                <a href="#" class="hover:text-cyan-400">Licensing</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        const navContent = document.getElementById('nav-content');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navContent.classList.add('bg-slate-900/95', 'backdrop-blur-xl', 'py-2', 'border-white/10', 'shadow-2xl');
+                navContent.classList.remove('bg-transparent', 'py-3', 'border-transparent');
+                navbar.classList.remove('py-6');
+                navbar.classList.add('py-4');
+            } else {
+                navContent.classList.remove('bg-slate-900/95', 'backdrop-blur-xl', 'py-2', 'border-white/10', 'shadow-2xl');
+                navContent.classList.add('bg-transparent', 'py-3', 'border-transparent');
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
+            }
+        });
+
+        // Mobile Menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

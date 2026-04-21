@@ -1,47 +1,620 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OP Scanner</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .custom-transform {
-            transform: translateZ(50px);
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>OPscanner - 你的品牌，正在被討論。你知道嗎？</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-primary": "#742fe5",
+            "surface-dim": "#0e0e13",
+            "secondary-fixed-dim": "#ddb3ff",
+            "secondary": "#c38bf5",
+            "primary-fixed": "#b28cff",
+            "on-secondary": "#3b0065",
+            "on-secondary-fixed": "#4d137b",
+            "secondary-container": "#612b8f",
+            "on-secondary-container": "#e5c4ff",
+            "on-secondary-fixed-variant": "#6b369a",
+            "surface-container-lowest": "#000000",
+            "on-surface": "#f9f5fd",
+            "primary": "#bd9dff",
+            "on-error": "#490013",
+            "error-dim": "#d73357",
+            "outline": "#76747b",
+            "tertiary-dim": "#f17799",
+            "secondary-dim": "#be86ef",
+            "background": "#0e0e13",
+            "outline-variant": "#48474d",
+            "primary-fixed-dim": "#a67aff",
+            "surface": "#0e0e13",
+            "primary-container": "#b28cff",
+            "surface-tint": "#bd9dff",
+            "surface-container": "#19191f",
+            "surface-bright": "#2c2b33",
+            "on-error-container": "#ffb2b9",
+            "surface-variant": "#25252d",
+            "on-primary-fixed": "#000000",
+            "primary-dim": "#8a4cfc",
+            "inverse-surface": "#fcf8ff",
+            "on-primary": "#3c0089",
+            "secondary-fixed": "#e6c5ff",
+            "tertiary-fixed": "#ff8eac",
+            "on-surface-variant": "#acaab1",
+            "tertiary-fixed-dim": "#f77c9e",
+            "on-background": "#f9f5fd",
+            "on-tertiary": "#6a0a31",
+            "tertiary-container": "#fe81a4",
+            "on-tertiary-container": "#5a0027",
+            "on-tertiary-fixed": "#380016",
+            "on-primary-container": "#2e006c",
+            "surface-container-high": "#1f1f26",
+            "surface-container-highest": "#25252d",
+            "error": "#ff6e84",
+            "on-primary-fixed-variant": "#390083",
+            "on-tertiary-fixed-variant": "#711036",
+            "tertiary": "#ff97b2",
+            "error-container": "#a70138",
+            "inverse-on-surface": "#55545b",
+            "surface-container-low": "#131319"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
         }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    body { 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .glass-panel { 
+      background: rgba(37, 37, 45, 0.6); 
+      backdrop-filter: blur(24px); 
+      -webkit-backdrop-filter: blur(24px);
+    }
+    .text-gradient { 
+      background: linear-gradient(to right, #bd9dff, #8a4cfc); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .shadow-glow { 
+      box-shadow: 0 0 40px rgba(189, 157, 255, 0.08);
+    }
+    .bg-grid-pattern { 
+      background-image: linear-gradient(to right, rgba(118, 116, 123, 0.05) 1px, transparent 1px), 
+                        linear-gradient(to bottom, rgba(118, 116, 123, 0.05) 1px, transparent 1px); 
+      background-size: 40px 40px;
+    }
+    /* 3D Perspective for hero image */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-gpu-3d {
+      transform-style: preserve-3d;
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <nav aria-label="Main Navigation">
-            <ul class="flex space-x-4">
-                <li><a href="#home" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a></li>
-                <li><a href="#about" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">About</a></li>
-                <li><a href="#contact" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="bg-background text-on-surface antialiased overflow-x-hidden">
 
-    <main>
-        <article>
-            <h1 aria-label="Welcome to OP Scanner">Welcome to OP Scanner</h1>
-            <p>This tool is designed to scan for various operations.</p>
-            <div class="custom-transform">
-                <p class="text-xl">Explore the Features!</p>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-violet-900/10">
+  <div class="flex justify-between items-center px-8 h-20 max-w-screen-2xl mx-auto">
+    <div class="text-xl font-bold tracking-tighter text-white">
+      OPscanner
+    </div>
+    
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex gap-8 items-center">
+      <a class="text-sm font-medium tracking-wide text-slate-400 hover:text-slate-100 transition-colors" href="#features">Features</a>
+      <a class="text-sm font-medium tracking-wide text-slate-400 hover:text-slate-100 transition-colors" href="#pricing">Pricing</a>
+      <a class="text-sm font-medium tracking-wide text-slate-400 hover:text-slate-100 transition-colors" href="#enterprise">Enterprise</a>
+      <a class="text-sm font-medium tracking-wide text-slate-400 hover:text-slate-100 transition-colors" href="#docs">Docs</a>
+    </div>
+
+    <!-- Auth Buttons -->
+    <div class="flex gap-4 items-center">
+      <button class="text-sm font-medium tracking-wide text-slate-400 hover:text-slate-100 transition-colors hidden md:block">Login</button>
+      <button class="bg-primary hover:bg-primary-dim text-on-primary text-sm font-medium tracking-wide px-5 py-2.5 rounded-md transition-all duration-300 active:scale-95">
+        Get Started
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-grid-pattern">
+  <div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none"></div>
+  <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+  
+  <div class="max-w-screen-2xl mx-auto px-8 w-full flex flex-col lg:flex-row items-center gap-16 relative z-10">
+    
+    <!-- Hero Content -->
+    <div class="w-full lg:w-1/2 flex flex-col gap-8">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-surface-container-highest border border-outline-variant/15 w-max">
+        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        <span class="text-xs font-medium tracking-wider text-primary">OPscanner Beta Now Live</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-5xl lg:text-7xl font-bold tracking-tight leading-tight">
+        你的品牌<br>正在被討論。<br>
+        <span class="text-gradient">你知道嗎？</span>
+      </h1>
+
+      <!-- Description -->
+      <p class="text-lg text-on-surface-variant max-w-xl leading-relaxed">
+        OPscanner — 台灣首款本地端品牌輿情監控系統。擺脫昂貴的雲端訂閱，將數據控制權還給你。即時掌握 PTT、Dcard、Mobile01 與各大論壇動態。
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 pt-4">
+        <button class="bg-primary hover:bg-primary-dim text-on-primary font-medium px-8 py-4 rounded-md transition-all duration-300 active:scale-95 shadow-glow flex items-center justify-center gap-2">
+          <span>立即下載試用</span>
+          <span class="material-symbols-outlined" aria-hidden="true">download</span>
+        </button>
+        <button class="bg-surface-container-highest hover:bg-surface-container-high text-primary border border-outline-variant/15 font-medium px-8 py-4 rounded-md transition-all duration-300 active:scale-95 flex items-center justify-center">
+          領取免費試用 3 天
+        </button>
+      </div>
+    </div>
+
+    <!-- Hero Image with 3D Effect -->
+    <div class="w-full lg:w-1/2 perspective-1000">
+      <div class="glass-panel border border-outline-variant/15 rounded-xl p-2 shadow-glow transform-gpu-3d transition-transform duration-700 hover:scale-105" style="transform: rotateX(5deg) rotateY(-5deg);">
+        <img 
+          alt="Dashboard showing advanced analytics with dark mode interface, glowing neon purple charts, sleek minimalist design" 
+          class="w-full h-auto rounded-lg opacity-90 mix-blend-screen" 
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy8yJhC5aZOmNZHstzGrNhK7oqlX1gNwE0iKKgF_cTJ_sTRAs-2svmqa7_4HHHtQfvddJzXOxs7ynw75Vyi4ji1kef1JJwI_SCJy0Ql2dJ556aTbTWOlHE_wZP9BE2ZwqzkA4jPia_hmM2cqgqqgXXRe3E4rJrPM2W_XrJ0pF9apFAGk6T_62z38I0AW9_4u2sYfQMA8n-v2NwdfDr1Z2zlNi5cXX1eLfTuXfSo8C2VleJ4hU3awnt7Kmop4hhhHnnPvU3HJKas-0"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pain Points Section -->
+<section class="py-32 bg-surface-container-lowest relative">
+  <div class="max-w-screen-2xl mx-auto px-8">
+    <div class="mb-20">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-6 tracking-tight text-center">你還在這樣監控輿情嗎？</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary to-transparent mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Pain Point Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Card 1: Manual Search -->
+      <div class="bg-surface-container-low p-8 rounded-xl border border-transparent hover:border-error/20 transition-all duration-500 hover:bg-surface-container-high group">
+        <div class="w-14 h-14 rounded-lg bg-error-container/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <span class="material-symbols-outlined text-error text-3xl" aria-hidden="true">search_off</span>
+        </div>
+        <h3 class="text-xl font-bold mb-4">每天手動 Google 搜尋</h3>
+        <p class="text-on-surface-variant leading-relaxed text-sm">
+          花費大量時間在各大論壇搜尋品牌消息和輿論，容易遺漏且效率極低。
+        </p>
+      </div>
+
+      <!-- Card 2: Time Consuming -->
+      <div class="bg-surface-container-low p-8 rounded-xl border border-transparent hover:border-error/20 transition-all duration-500 hover:bg-surface-container-high group">
+        <div class="w-14 h-14 rounded-lg bg-error-container/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <span class="material-symbols-outlined text-error text-3xl" aria-hidden="true">trending_down</span>
+        </div>
+        <h3 class="text-xl font-bold mb-4">花費半天掃視、整理、搜尋資料</h3>
+        <p class="text-on-surface-variant leading-relaxed text-sm">
+          效率太低，人力成本一天約 $1000，一個月至少花費 $22000 監控輿情。
+        </p>
+      </div>
+
+      <!-- Card 3: Messy Data -->
+      <div class="bg-surface-container-low p-8 rounded-xl border border-transparent hover:border-error/20 transition-all duration-500 hover:bg-surface-container-high group">
+        <div class="w-14 h-14 rounded-lg bg-error-container/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <span class="material-symbols-outlined text-error text-3xl" aria-hidden="true">insert_chart_outlined</span>
+        </div>
+        <h3 class="text-xl font-bold mb-4">數據雜亂無章，不知從何整理</h3>
+        <p class="text-on-surface-variant leading-relaxed text-sm">
+          收集完資料還要手動整理 Excel 畫圖表，報告總是交不出來。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-32 relative bg-surface" id="features">
+  <div class="max-w-screen-2xl mx-auto px-8">
+    <div class="mb-24 text-center">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-6 tracking-tight">一個系統，取代你的整個輿情工作流程</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary to-transparent mx-auto rounded-full"></div>
+    </div>
+
+    <div class="flex flex-col gap-24">
+      
+      <!-- Feature 1: Cross-Platform Scanning -->
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="w-full md:w-1/2">
+          <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-primary text-4xl" aria-hidden="true">travel_explore</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">跨平台全掃描</h3>
+          <p class="text-on-surface-variant leading-relaxed text-lg">
+            PTT、Dcard、Mobile01、Facebook 社團（含私密社團）、Facebook 粉絲專頁、Threads、YouTube、新聞媒體，一鍵同時掃描，並行執行不等待。連競品無法觸及的 Facebook 私密社團，我們也能深入監測。
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 glass-panel p-8 rounded-2xl border border-white/5 shadow-xl">
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center justify-between p-4 bg-surface-container rounded-lg border border-white/5">
+              <div class="flex items-center gap-3">
+                <span class="font-bold text-blue-400">PTT</span>
+                <span class="text-sm text-on-surface-variant">Gossiping</span>
+              </div>
+              <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">5m ago</span>
             </div>
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li>Fast Scanning</li>
-                    <li>Multiple Operations</li>
-                    <li>User-Friendly Interface</li>
-                </ul>
-            </section>
-        </article>
-    </main>
+            <div class="flex items-center justify-between p-4 bg-surface-container rounded-lg border border-white/5">
+              <div class="flex items-center gap-3">
+                <span class="font-bold text-blue-300">Dcard</span>
+                <span class="text-sm text-on-surface-variant">Tech</span>
+              </div>
+              <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">12m ago</span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-surface-container rounded-lg border border-white/5">
+              <div class="flex items-center gap-3">
+                <span class="font-bold text-green-400">Mobile01</span>
+                <span class="text-sm text-on-surface-variant">Gadget</span>
+              </div>
+              <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">1h ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <footer>
-        <p>&copy; 2026 OP Scanner. All rights reserved.</p>
-    </footer>
+      <!-- Feature 2: AI Emotion Analysis -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+        <div class="w-full md:w-1/2">
+          <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-primary text-4xl" aria-hidden="true">psychology</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">AI 情緒分析 + 輿情摘要</h3>
+          <p class="text-on-surface-variant leading-relaxed text-lg">
+            自動判斷文章情緒色彩（正向、負向、中立），並生成精簡重點摘要，節省 90% 閱讀時間。
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 glass-panel p-8 rounded-2xl border border-white/5 shadow-xl">
+          <div class="flex gap-4 h-40 items-end justify-center px-4 border-b border-white/10 pb-4">
+            <div class="w-1/3 bg-green-500/80 rounded-t-sm" style="height: 60%"></div>
+            <div class="w-1/3 bg-gray-500/80 rounded-t-sm" style="height: 30%"></div>
+            <div class="w-1/3 bg-red-500/80 rounded-t-sm" style="height: 10%"></div>
+          </div>
+          <div class="flex justify-between mt-2 text-sm">
+            <span class="text-green-400">正向 60%</span>
+            <span class="text-gray-400">中立 30%</span>
+            <span class="text-red-400">負向 10%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Negative Alert System -->
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="w-full md:w-1/2">
+          <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-primary text-4xl" aria-hidden="true">warning</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">負面預警機制</h3>
+          <p class="text-on-surface-variant leading-relaxed text-lg">
+            設定關鍵字監控，當系統偵測到大量負面討論時，即時發出通知，搶佔公關危機處理黃金時間。
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 glass-panel p-8 rounded-2xl border border-error/30 shadow-xl shadow-error/10 relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-4 animate-pulse">
+            <span class="material-symbols-outlined text-error text-3xl" aria-hidden="true">notifications_active</span>
+          </div>
+          <div class="flex flex-col gap-3 mt-4">
+            <div class="p-3 bg-error/10 border border-error/20 rounded text-error flex items-center gap-2">
+              <span class="material-symbols-outlined text-sm" aria-hidden="true">error</span>
+              <span>偵測到異常負面聲量攀升 (100+ 提及)</span>
+            </div>
+            <div class="p-3 bg-surface-container rounded border border-white/5 text-sm text-on-surface-variant">
+              "新產品更新後出現嚴重耗電問題..."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 4: Unlimited Keywords -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+        <div class="w-full md:w-1/2">
+          <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-primary text-4xl" aria-hidden="true">all_inclusive</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">無限品牌 · 無限次掃描</h3>
+          <p class="text-on-surface-variant leading-relaxed text-lg">
+            突破傳統 SaaS 軟體的關鍵字數量限制。在本地端運行，你想搜幾個品牌就搜幾個品牌。
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 glass-panel p-8 rounded-2xl border border-white/5 shadow-xl flex items-center justify-center">
+          <div class="text-center">
+            <span class="material-symbols-outlined text-6xl text-primary/50 mb-4 block" aria-hidden="true">all_inclusive</span>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="px-3 py-1 bg-surface-bright rounded-full text-xs">品牌A</span>
+              <span class="px-3 py-1 bg-surface-bright rounded-full text-xs">競品B</span>
+              <span class="px-3 py-1 bg-surface-bright rounded-full text-xs">產業關鍵字C</span>
+              <span class="px-3 py-1 bg-surface-bright rounded-full text-xs">產品D</span>
+              <span class="px-3 py-1 bg-surface-bright rounded-full text-xs">...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Section -->
+<section class="py-32 bg-surface-container-lowest relative">
+  <div class="max-w-screen-xl mx-auto px-8">
+    <div class="mb-16 text-center">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-6 tracking-tight">為什麼選擇 OPscanner？</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary to-transparent mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+            <th class="p-6 border-b border-white/10 text-on-surface-variant font-medium">比較項目</th>
+            <th class="p-6 border-b border-white/10 font-bold text-lg text-primary bg-primary/5 rounded-t-xl border-x border-t border-primary/30 relative">
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">OPscanner</div>
+              OPscanner
+            </th>
+            <th class="p-6 border-b border-white/10 text-on-surface-variant font-medium">OpView</th>
+            <th class="p-6 border-b border-white/10 text-on-surface-variant font-medium">Qsearch</th>
+            <th class="p-6 border-b border-white/10 text-on-surface-variant font-medium">KEYPO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-6 border-b border-white/5">部署方式</td>
+            <td class="p-6 border-b border-white/5 bg-primary/5 border-x border-primary/30 text-green-400 font-medium">本地端 (資料100%私有)</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">雲端 SaaS</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">雲端 SaaS</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">雲端 SaaS</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-white/5">計費方式</td>
+            <td class="p-6 border-b border-white/5 bg-primary/5 border-x border-primary/30 text-green-400 font-medium">買斷 / 低月租</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">高昂年費</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">按聲量/模組計費</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">高昂年費</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-white/5">關鍵字限制</td>
+            <td class="p-6 border-b border-white/5 bg-primary/5 border-x border-primary/30 text-green-400 font-medium">無上限</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">依方案受限</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">依方案受限</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">依方案受限</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-white/5">論壇覆蓋</td>
+            <td class="p-6 border-b border-white/5 bg-primary/5 border-x border-primary/30 font-medium">PTT, Dcard, Mobile01 等</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">廣泛涵蓋</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">偏重社群媒體</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">廣泛涵蓋</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-white/5">Facebook 私密社團監測</td>
+            <td class="p-6 border-b border-white/5 bg-primary/5 border-x border-primary/30 font-medium text-green-400">✅</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant text-red-400">❌</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant text-red-400">❌</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant text-red-400">❌</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-white/5">YouTube 頻道監測</td>
+            <td class="p-6 border-b border-white/5 bg-primary/5 border-x border-primary/30 font-medium text-green-400">✅</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant text-red-400">❌</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">部分</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant text-red-400">❌</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-white/5">AI 分析</td>
+            <td class="p-6 border-b border-white/5 bg-primary/5 border-x border-primary/30 font-medium">內建情緒分析與摘要</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">基礎語意分析</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">有</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">有</td>
+          </tr>
+          <tr>
+            <td class="p-6 border-b border-white/5">操作門檻</td>
+            <td class="p-6 border-b border-white/5 bg-primary/5 border-x border-primary/30 rounded-b-xl text-green-400 font-medium">極低，三步驟完成</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">需專業訓練</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">需專業訓練</td>
+            <td class="p-6 border-b border-white/5 text-on-surface-variant">需專業訓練</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="py-32 bg-surface relative" id="pricing">
+  <div class="max-w-screen-xl mx-auto px-8 text-center">
+    <div class="mb-16">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-6 tracking-tight">清楚透明，一個方案涵蓋全功能</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary to-transparent mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Pricing Card -->
+    <div class="max-w-2xl mx-auto bg-surface-container border-2 border-primary rounded-2xl p-10 relative shadow-2xl shadow-primary/20">
+      <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-bold tracking-wide flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm" aria-hidden="true">local_fire_department</span>
+        🔥 測試階段限時優惠
+      </div>
+
+      <!-- Price -->
+      <div class="mb-8 mt-4">
+        <span class="text-5xl font-bold text-primary">NT$ 8,800</span>
+        <span class="text-on-surface-variant text-xl"> / 月</span>
+        <div class="text-on-surface-variant mt-2 text-sm line-through">原價 NT$ 10,000 / 月（無綁約）</div>
+      </div>
+
+      <!-- Annual Discount -->
+      <div class="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-8 text-sm text-primary font-medium">
+        簽訂年約另享優惠 → NT$8000 / 月，省下超過 NT$10,000
+      </div>
+
+      <!-- Features List -->
+      <ul class="flex flex-col gap-4 mb-10 text-left max-w-md mx-auto">
+        <li class="flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-green-400 text-lg" aria-hidden="true">check_circle</span>
+          <span>全平台掃描（PTT / Dcard / Mobile01 / FB社團＆粉專 / Threads / YouTube / 新聞）</span>
+        </li>
+        <li class="flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-green-400 text-lg" aria-hidden="true">check_circle</span>
+          <span>AI 情緒分析 + 輿情摘要報告</span>
+        </li>
+        <li class="flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-green-400 text-lg" aria-hidden="true">check_circle</span>
+          <span>負面預警機制</span>
+        </li>
+        <li class="flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-green-400 text-lg" aria-hidden="true">check_circle</span>
+          <span>無限品牌監測</span>
+        </li>
+        <li class="flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-green-400 text-lg" aria-hidden="true">check_circle</span>
+          <span>無限次掃描，不計次收費</span>
+        </li>
+        <li class="flex items-center gap-3 text-sm">
+          <span class="material-symbols-outlined text-green-400 text-lg" aria-hidden="true">check_circle</span>
+          <span>macOS 本地端運行，資料完全不上雲</span>
+        </li>
+      </ul>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="bg-primary hover:bg-primary-dim text-on-primary font-medium px-8 py-3 rounded-lg transition-all duration-300 active:scale-95 shadow-glow">
+          申請免費試用 3 天
+        </button>
+        <button class="bg-transparent border border-outline-variant hover:bg-white/5 text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 active:scale-95">
+          立即下載
+        </button>
+      </div>
+      <p class="mt-6 text-xs text-on-surface-variant">購買詳情請聯繫客服洽談</p>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-32 bg-surface-container-lowest relative">
+  <div class="max-w-screen-2xl mx-auto px-8">
+    <div class="mb-20 text-center">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-6 tracking-tight">三步驟，開始掌握品牌聲量</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary to-transparent mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Steps -->
+    <div class="flex flex-col md:flex-row justify-between items-center relative max-w-5xl mx-auto gap-12 md:gap-4">
+      <!-- Connecting Line -->
+      <div class="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 z-0"></div>
+
+      <!-- Step 1 -->
+      <div class="flex flex-col items-center text-center relative z-10 w-full md:w-1/3">
+        <div class="w-24 h-24 rounded-full bg-surface-container border-4 border-surface-lowest flex items-center justify-center text-2xl font-bold text-primary mb-6 shadow-glow">
+          1
+        </div>
+        <h3 class="text-xl font-bold mb-3">輸入啟動碼</h3>
+        <p class="text-on-surface-variant text-sm">下載軟體後，輸入購買獲得的專屬授權碼啟動系統。</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="flex flex-col items-center text-center relative z-10 w-full md:w-1/3">
+        <div class="w-24 h-24 rounded-full bg-surface-container border-4 border-surface-lowest flex items-center justify-center text-2xl font-bold text-primary mb-6 shadow-glow">
+          2
+        </div>
+        <h3 class="text-xl font-bold mb-3">設定關鍵字</h3>
+        <p class="text-on-surface-variant text-sm">輸入你的品牌名稱、競品名稱或任何你想追蹤的產業詞彙。</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="flex flex-col items-center text-center relative z-10 w-full md:w-1/3">
+        <div class="w-24 h-24 rounded-full bg-surface-container border-4 border-surface-lowest flex items-center justify-center text-2xl font-bold text-primary mb-6 shadow-glow">
+          3
+        </div>
+        <h3 class="text-xl font-bold mb-3">一鍵掃描分析</h3>
+        <p class="text-on-surface-variant text-sm">點擊掃描，等待幾分鐘，精美的輿情報告自動為你準備好。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="py-32 relative bg-surface-container overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none"></div>
+  <div class="max-w-screen-xl mx-auto px-8 text-center relative z-10">
+    <h2 class="text-4xl lg:text-6xl font-black mb-8 tracking-tighter">
+      在台灣做品牌，網路輿情尤為重要<br>
+      <span class="text-gradient">必須即時掌控、應對</span>
+    </h2>
+    <p class="text-xl text-on-surface-variant mb-12 max-w-2xl mx-auto">
+      掌握輿情，別讓資訊落差成為你的弱點。現在就開始使用 OPscanner，找回數據的主導權。
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row justify-center gap-6">
+      <button class="bg-primary hover:bg-primary-dim text-on-primary font-bold text-lg px-10 py-5 rounded-lg transition-all duration-300 active:scale-95 shadow-glow flex items-center justify-center gap-2">
+        <span>立即下載</span>
+        <span class="material-symbols-outlined" aria-hidden="true">download</span>
+      </button>
+      <button class="bg-surface hover:bg-surface-bright text-white border border-white/20 font-bold text-lg px-10 py-5 rounded-lg transition-all duration-300 active:scale-95">
+        免費試用 3 天
+      </button>
+    </div>
+    <p class="mt-8 text-sm text-on-surface-variant">支援 macOS 系統</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full py-16 bg-slate-950 border-t border-white/5">
+  <div class="flex flex-col md:flex-row justify-between items-center px-8 gap-8 max-w-screen-2xl mx-auto">
+    
+    <!-- Brand -->
+    <div class="flex flex-col items-center md:items-start gap-2">
+      <div class="text-2xl font-black text-white">OPscanner</div>
+      <div class="text-sm text-slate-400">品牌輿情，盡在掌握</div>
+    </div>
+
+    <!-- Links -->
+    <div class="flex flex-wrap gap-6 items-center justify-center">
+      <a class="text-sm text-slate-400 hover:text-violet-300 transition-colors" href="#download">下載</a>
+      <a class="text-sm text-slate-400 hover:text-violet-300 transition-colors" href="#trial">試用申請</a>
+      <a class="text-sm text-slate-400 hover:text-violet-300 transition-colors" href="#contact">聯繫客服</a>
+      <a class="text-sm text-slate-400 hover:text-violet-300 transition-colors" href="#security">Security</a>
+      <a class="text-sm text-slate-400 hover:text-violet-300 transition-colors" href="#privacy">Privacy</a>
+      <a class="text-sm text-slate-400 hover:text-violet-300 transition-colors" href="#terms">Terms</a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-slate-500 text-xs">
+      © 2026 OPscanner Precision Systems. All rights reserved.
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
